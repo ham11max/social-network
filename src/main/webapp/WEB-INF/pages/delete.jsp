@@ -16,13 +16,13 @@
 <div style ="margin-top: 210px;">
 <div align="center">
 <h2>Delete</h2>
-<h3>You want delete user please insert his login</h3>
+<h4>You want delete user, please insert his login</h4>
     <form class="form-inline" action="del" method="post">
         <div class="form-group">
             <label class="sr-only" for="exampleInputAmount">Delete user</label>
             <div class="input-group">
                 <div class="input-group-addon">User</div>
-                <input type="text" name="login" class="form-control" id="exampleInputAmount" placeholder="Write user here">
+                <input type="text" name="login" class="form-control" id="exampleInputAmount" placeholder="Write login here">
             </div>
         </div>
         <button type="submit" class="btn btn-primary">Delete User</button>
