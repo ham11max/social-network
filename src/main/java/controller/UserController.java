@@ -39,7 +39,6 @@ public class UserController {
                 @ModelAttribute@RequestParam(value = "login") String login,
                 @ModelAttribute@RequestParam(value = "password") String pass) {
             mainlogin = login;
-            System.out.println(login);
             ModelAndView model = new ModelAndView();
             model.addObject("login",login);
             if (userServices.checkForLogining(login,pass)){
@@ -157,7 +156,7 @@ public class UserController {
         @RequestMapping(value ="/read", method = RequestMethod.GET)
         public ModelAndView showReadMessagePage(ModelAndView model){
             List<Message> messages = userServices.getMessages(mainlogin);
-            if(messages.isEmpty()){
+            if(messages==null){
                 String status = "You don`t have messages!!!";
                 model.addObject("status",status);
                 model.addObject("log" , mainlogin);

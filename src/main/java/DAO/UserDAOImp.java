@@ -53,8 +53,6 @@ public class UserDAOImp implements UserDao {
             ps = con.prepareStatement(query);
             rs = ps.executeQuery();
             while(rs.next()){
-                System.out.println(rs.getString("login"));
-                System.out.println(rs.getString("password"));
                 if ((login.equals(rs.getString("login")))&&(password.equals(rs.getString("password")))){
                     return true;
                 }
@@ -94,7 +92,6 @@ public class UserDAOImp implements UserDao {
             ps = con.prepareStatement(query);
             rs = ps.executeQuery();
             while(rs.next()){
-                System.out.println(rs.getString("login"));
                 if (login.equals(rs.getString("login"))){
                     return true;
                 }
@@ -146,13 +143,12 @@ public class UserDAOImp implements UserDao {
 
         return result;
     }
-
-    public List<Message> getMessages(String receiver){
-        String query = "SELECT * FROM messages WHERE receiver =:receiver";
-        List<Message> result = namedParameterJdbcTemplate.query(query, new MessgeMapper());
-
+    @Override
+    public List<Message> getMessages(){
+        String query =  "SELECT * FROM messages";
+        List<Message> result = namedParameterJdbcTemplate.query(query, new MessageMapper());
+        System.out.println(result);
         return result;
-
     }
 
     @Override
@@ -209,11 +205,10 @@ public class UserDAOImp implements UserDao {
             user.setLogin(rs.getString("login"));
             user.setPass(rs.getString("password"));
 
-
             return user;
         }
     }
-    private static final class MessgeMapper implements RowMapper<Message> {
+    private static final class MessageMapper implements RowMapper<Message> {
 
         public Message mapRow(ResultSet rs, int rowNum) throws SQLException {
             Message message = new Message();

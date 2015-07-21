@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -57,7 +58,20 @@ public class UserServiceImpl implements UserService {
     }
 
     public List<Message> getMessages(String receiver) {
-        return userDao.getMessages(receiver);
+        if (receiver.isEmpty()) {
+            return null;
+        }else{
+            List<Message> userMessages  = new ArrayList<Message>();
+            for(Message message :userDao.getMessages()){
+                String receivers = message.getReceiver();
+                if(receiver.equals(receivers)){
+                    userMessages.add(message);
+                }
+            }
+            System.out.println(userMessages.iterator().next().getReceiver());
+            return userMessages;
+        }
+
     }
 
 
