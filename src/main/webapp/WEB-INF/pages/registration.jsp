@@ -17,7 +17,7 @@
 <div style ="margin-top: 250px;">
     <div align="center">
         <font size="16"  face="Times New Roman">
-            <p class="bg-success"> <h3>Registration</h3></p>
+            <p class="bg-success"> Registration</p>
         </font>
 
 
