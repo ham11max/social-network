@@ -21,7 +21,9 @@ public class UserController {
 
         @Autowired
         private UserService userServices;
-        private User user;
+        public User mainUser = new User();
+        private String mainlogin ="qq";
+
 
 
 
@@ -37,11 +39,14 @@ public class UserController {
         public ModelAndView login(
                 @ModelAttribute@RequestParam(value = "login") String login,
                 @ModelAttribute@RequestParam(value = "password") String pass) {
+           // mainUser.setLogin(login);
+            mainlogin = login;
+            System.out.println(login);
             ModelAndView model = new ModelAndView();
             model.addObject("login",login);
             if (userServices.checkForLogining(login,pass)){
-                user.setLogin(login);
                 model.setViewName("loginSucces");
+                System.out.println(login);
             } else {
                 model.setViewName("error");
             }
@@ -129,19 +134,19 @@ public class UserController {
                 return logDel ;
 
     }
-        @RequestMapping(value = "/writesucc" , method = RequestMethod.POST)
+        @RequestMapping(value = "/write" , method = RequestMethod.POST)
         public ModelAndView sendMessage(@RequestParam(value = "login") String login ,
                                         @RequestParam(value = "message") String message){
 
 
             CheckLoginRequest request = new CheckLoginRequest();
             request.setLogin(login);
-            if(userServices.checkLogin(request) == true) {
+            if(userServices.checkLogin(request) == false) {
                 return new ModelAndView("error");
 
             } else {
                 Message sending = new Message();
-                sending.setSender(user.getLogin());
+                sending.setSender(mainlogin);
                 sending.setReceiver(login);
                 sending.setMessage(message);
                 userServices.sendMessage(sending);

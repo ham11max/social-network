@@ -22,6 +22,9 @@
     <br>
     <a class="btn btn-primary" href="users" role="button">Get all users</a>
 </br>
+    <br>
+    <a class="btn btn-primary" href="write" role="button">Write message</a>
+    </br>
     </div>
   </div>
 
