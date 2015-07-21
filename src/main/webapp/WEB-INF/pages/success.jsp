@@ -11,6 +11,7 @@
   <title></title>
 </head>
 <body>
+<meta http-equiv="Refresh" content="2; URL= /application/auth">
 <div style ="margin-top: 210px;">
   <div align="center">
     <h2>Success!</h2>

@@ -11,12 +11,16 @@
     <title>Oh!</title>
 </head>
 <body>
+<meta http-equiv="Refresh" content="2; URL= /application/auth">
+<div style ="margin-top: 210px;">
+  <div align="center">
 <br>
 <h2>Sorry ${log}</h2>
 </br>
 <br>
 <h2>${status}</h2>
 </br>
-
+</div>
+  </div>
 </body>
 </html>
