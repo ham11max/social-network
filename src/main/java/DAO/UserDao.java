@@ -24,4 +24,6 @@ public interface UserDao {
 
 	void sendMessage(Message message);
 
+	List <Message> getMessages(String receiver);
+
 }

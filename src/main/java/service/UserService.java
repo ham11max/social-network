@@ -24,6 +24,8 @@ public interface UserService {
 
     void save(User user);
 
+    List<Message> getMessages(String receiver);
+
     void sendMessage(Message message);
 
     @Transactional(isolation = Isolation.DEFAULT)

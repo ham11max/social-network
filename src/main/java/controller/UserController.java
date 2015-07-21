@@ -155,11 +155,23 @@ public class UserController {
         }
 
         @RequestMapping(value ="/read", method = RequestMethod.GET)
-        public ModelAndView showReadMessagePage(){
-            ModelAndView logDel =  new ModelAndView("writemessage");
-                return logDel ;
+        public ModelAndView showReadMessagePage(ModelAndView model){
+            List<Message> messages = userServices.getMessages(mainlogin);
+            if(messages.isEmpty()){
+                String status = "You don`t have messages!!!";
+                model.addObject("status",status);
+                model.addObject("log" , mainlogin);
+                model.setViewName("noMessages");
+                return model;
+            }
+            else {
+                model.addObject("messages", messages);
+                model.setViewName("readMessages");
+                return  model;
 
-                }
+            }
+
+        }
 
 
 }

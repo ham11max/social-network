@@ -56,4 +56,9 @@ public class UserServiceImpl implements UserService {
         userDao.sendMessage(message);
     }
 
+    public List<Message> getMessages(String receiver) {
+        return userDao.getMessages(receiver);
+    }
+
+
 }

@@ -147,7 +147,15 @@ public class UserDAOImp implements UserDao {
         return result;
     }
 
+    public List<Message> getMessages(String receiver){
+        String query = "SELECT * FROM messages WHERE receiver =:receiver";
+        List<Message> result = namedParameterJdbcTemplate.query(query, new MessgeMapper());
 
+        return result;
+
+    }
+
+    @Override
     public void sendMessage(Message message){
         String query = "INSERT INTO messages ( sender, receiver, message ) "
                 + "VALUES (:sender , :receiver , :message)";
@@ -203,6 +211,18 @@ public class UserDAOImp implements UserDao {
 
 
             return user;
+        }
+    }
+    private static final class MessgeMapper implements RowMapper<Message> {
+
+        public Message mapRow(ResultSet rs, int rowNum) throws SQLException {
+            Message message = new Message();
+            message.setId(rs.getInt("id"));
+            message.setSender(rs.getString("sender"));
+            message.setReceiver(rs.getString("receiver"));
+            message.setMessage(rs.getString("message"));
+
+            return message;
         }
     }
 }
