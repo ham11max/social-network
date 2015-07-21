@@ -15,7 +15,11 @@
 <body>
 <div style ="margin-top: 210px;">
 <div align="center">
-    <p class="bg-primary">This is new social network</p>
+    <font size="20"  face="Times New Roman">
+        <p class="bg-primary">This is new social network</p>
+
+    </font>
+
 
     <br>If you is  member of our social please</br>
     <br>
