@@ -1,5 +1,6 @@
 package DAO;
 
+import model.Message;
 import model.User;
 import java.util.List;
 
@@ -20,5 +21,7 @@ public interface UserDao {
 	void delete(String login);
 
 	boolean checkForLogining(String user, String password);
+
+	void sendMessage(Message message);
 
 }

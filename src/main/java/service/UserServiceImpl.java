@@ -2,6 +2,7 @@ package service;
 
 import DAO.UserDao;
 import model.CheckLoginRequest;
+import model.Message;
 import model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -50,5 +51,9 @@ public class UserServiceImpl implements UserService {
     public boolean checkLogin(CheckLoginRequest request){
         return userDao.checkLogin(request.getLogin());
     };
+
+    public void sendMessage(Message message){
+        userDao.sendMessage(message);
+    }
 
 }

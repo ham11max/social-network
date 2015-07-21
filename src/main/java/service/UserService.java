@@ -1,6 +1,7 @@
 package service;
 
 import model.CheckLoginRequest;
+import model.Message;
 import model.User;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,6 +24,10 @@ public interface UserService {
 
     void save(User user);
 
+    void sendMessage(Message message);
+
     @Transactional(isolation = Isolation.DEFAULT)
     boolean checkForLogining(String login , String password);
+
+
 }

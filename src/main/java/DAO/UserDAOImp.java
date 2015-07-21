@@ -1,5 +1,6 @@
 package DAO;
 
+import model.Message;
 import model.User;
 import org.springframework.dao.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -146,6 +147,14 @@ public class UserDAOImp implements UserDao {
         return result;
     }
 
+
+    public void sendMessage(Message message){
+        String query = "INSERT INTO messages ( sender, receiver, message ) "
+                + "VALUES (:sender , :receiver , :message)";
+        namedParameterJdbcTemplate.update(query, getSqlParameterByModel(message));
+
+    }
+
     @Override
     public void save(User user) {
 
@@ -169,7 +178,16 @@ public class UserDAOImp implements UserDao {
         paramSource.addValue("name", user.getName());
         paramSource.addValue("login", user.getLogin());
         paramSource.addValue("password" , user.getPass());
-      //  paramSource.addValue("friends", convertListToDelimitedString(user.getFriends()));
+
+        return paramSource;
+    }
+    private SqlParameterSource getSqlParameterByModel(Message message) {
+
+        MapSqlParameterSource paramSource = new MapSqlParameterSource();
+        paramSource.addValue("id", message.getId());
+        paramSource.addValue("receiver", message.getReceiver());
+        paramSource.addValue("sender", message.getSender());
+        paramSource.addValue("message" , message.getMessage());
 
         return paramSource;
     }
@@ -182,7 +200,6 @@ public class UserDAOImp implements UserDao {
             user.setName(rs.getString("name"));
             user.setLogin(rs.getString("login"));
             user.setPass(rs.getString("password"));
-            //user.setFriends(convertDelimitedStringToList(rs.getString("friends")));
 
 
             return user;

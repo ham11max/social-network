@@ -4,6 +4,7 @@ package controller;
  * Created by HAMMAX on 18.07.2015.
  */
 import model.CheckLoginRequest;
+import model.Message;
 import org.springframework.beans.factory.annotation.Autowired;
 import model.User;
 import org.springframework.stereotype.Controller;
@@ -20,6 +21,9 @@ public class UserController {
 
         @Autowired
         private UserService userServices;
+        private User user;
+
+
 
         @RequestMapping(value = "/", method = RequestMethod.GET)
         public ModelAndView printWelcome(ModelMap model) {
@@ -33,11 +37,10 @@ public class UserController {
         public ModelAndView login(
                 @ModelAttribute@RequestParam(value = "login") String login,
                 @ModelAttribute@RequestParam(value = "password") String pass) {
-            System.out.println("controller login: " + login);
-            System.out.println("controller password: " + pass);
             ModelAndView model = new ModelAndView();
             model.addObject("login",login);
             if (userServices.checkForLogining(login,pass)){
+                user.setLogin(login);
                 model.setViewName("loginSucces");
             } else {
                 model.setViewName("error");
@@ -120,4 +123,33 @@ public class UserController {
 
 
         }
+        @RequestMapping(value ="/write", method = RequestMethod.GET)
+        public ModelAndView showMessagepage(){
+            ModelAndView logDel =  new ModelAndView("writemessage");
+                return logDel ;
+
+    }
+        @RequestMapping(value = "/writesucc" , method = RequestMethod.POST)
+        public ModelAndView sendMessage(@RequestParam(value = "login") String login ,
+                                        @RequestParam(value = "message") String message){
+
+
+            CheckLoginRequest request = new CheckLoginRequest();
+            request.setLogin(login);
+            if(userServices.checkLogin(request) == true) {
+                return new ModelAndView("error");
+
+            } else {
+                Message sending = new Message();
+                sending.setSender(user.getLogin());
+                sending.setReceiver(login);
+                sending.setMessage(message);
+                userServices.sendMessage(sending);
+
+                return  new ModelAndView("registrationSuccess");
+
+            }
+
+        }
+
 }
