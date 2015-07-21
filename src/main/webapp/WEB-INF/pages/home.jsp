@@ -6,24 +6,27 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
   <title>Social</title>
+    <link rel="stylesheet" type="text/css" href ="<c:url value="/css/bootstrap.css"/>"/>
 </head>
 <body>
 <div style ="margin-top: 210px;">
 <div align="center">
-    <h2>This is new social network</h2>
+    <p class="bg-primary">This is new social network</p>
+
     <br>If you is  member of our social please</br>
     <br>
-    <a href="log">Login</a>
+    <a href="log" class="btn btn-primary btn-lg active" role="button">Login</a>
     </br>
 <br>
-    if you want join US please
+    If you want join US please
 </br>
 
     <br>
-        <a href="reg"> register</a>
+        <a href="reg" class="btn btn-primary btn-lg active" role="button">Register</a>
     </br>
 </div>
 </div>
