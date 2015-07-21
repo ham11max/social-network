@@ -18,7 +18,7 @@
 
   <div class="panel panel-default"align="center">
     <!-- Default panel contents -->
-    <div class="panel-heading"><h2>Users list</h2></div>
+    <div class="panel-heading"><h2>All messages</h2></div>
 
     <!-- Table -->
 
@@ -32,34 +32,26 @@
         </td>
         <td align="center">
           <font size="10"  face="Times New Roman">
-            <p class="bg-success">Name</p>
+            <p class="bg-success">Sender</p>
           </font>
 
         </td>
         <td align="center">
           <font size="10"  face="Times New Roman">
-            <p class="bg-success">Login</p>
+            <p class="bg-success">Message</p>
           </font>
 
-        </td>
-        <td align="center">
-          <font size="10"  face="Times New Roman">
-            <p class="bg-success">Password</p>
-          </font>
-
-        </td>
       </tr>
-      <c:forEach items="${user}" var="user">
+      <c:forEach items="${messages}" var="message">
         <tr>
-          <td align="center"><c:out value="${user.id}"/></td>
-          <td align="center"><c:out value="${user.name}"/></td>
-          <td align="center"><c:out value="${user.login}"/></td>
-          <td align="center"><c:out value="${user.pass}"/></td>
+          <td align="center"><c:out value="${message.id}"/></td>
+          <td align="center"><c:out value="${message.sender}"/></td>
+          <td align="center"><c:out value="${message.message}"/></td>
         </tr>
       </c:forEach>
     </table>
   </div>
-  <a class="btn btn-success" href="logdel" role="button">Delete User</a>
+    <a class="btn btn-success" href="write" role="button">Send Message</a>
 </div>
 </div>
 </body>
