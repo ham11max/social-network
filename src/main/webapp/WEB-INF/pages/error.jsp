@@ -15,7 +15,10 @@
 <body>
 <div style ="margin-top: 210px;">
   <div align="center">
-      <p class="bg-danger"><h1>ERROR</h1></p>
+      <font size="20"  face="Times New Roman">
+          <p class="bg-danger">ERROR</p>
+
+      </font>
 
     </div>
   </div>
