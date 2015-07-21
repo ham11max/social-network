@@ -22,17 +22,17 @@
 
   <!-- Table -->
 
-  <table class="table table-hover" align="center">
-    <th align="center">ID</th>
-    <th align="center">Name</th>
-    <th align="center">Login</th>
-    <th align="center">Password</th>
+  <table class="table table-bordered" align="center">
+    <th>ID</th>
+    <th>Name</th>
+    <th>Login</th>
+    <th>Password</th>
     <c:forEach items="${user}" var="user">
       <tr>
-        <td align="center"><c:out value="${user.id}"/></td>
-        <td align="center"><c:out value="${user.name}"/></td>
-        <td align="center"><c:out value="${user.login}"/></td>
-        <td align="center"><c:out value="${user.pass}"/></td>
+        <td><c:out value="${user.id}"/></td>
+        <td><c:out value="${user.name}"/></td>
+        <td><c:out value="${user.login}"/></td>
+        <td><c:out value="${user.pass}"/></td>
       </tr>
     </c:forEach>
   </table>
