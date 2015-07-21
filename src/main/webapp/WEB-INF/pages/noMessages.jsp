@@ -15,7 +15,7 @@
 <h2>Sorry ${log}</h2>
 </br>
 <br>
-<h2>${messages}</h2>
+<h2>${status}</h2>
 </br>
 
 </body>

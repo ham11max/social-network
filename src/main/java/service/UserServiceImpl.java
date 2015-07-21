@@ -68,7 +68,6 @@ public class UserServiceImpl implements UserService {
                     userMessages.add(message);
                 }
             }
-            System.out.println(userMessages.iterator().next().getReceiver());
             return userMessages;
         }
 

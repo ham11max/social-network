@@ -156,7 +156,7 @@ public class UserController {
         @RequestMapping(value ="/read", method = RequestMethod.GET)
         public ModelAndView showReadMessagePage(ModelAndView model){
             List<Message> messages = userServices.getMessages(mainlogin);
-            if(messages==null){
+            if(messages.isEmpty()){
                 String status = "You don`t have messages!!!";
                 model.addObject("status",status);
                 model.addObject("log" , mainlogin);
