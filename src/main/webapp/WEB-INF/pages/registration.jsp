@@ -1,4 +1,3 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: HAMMAX
@@ -12,20 +11,26 @@
 <head>
     <title>registration</title>
     <link rel="stylesheet" type="text/css" href ="<c:url value="/css/reg.css"/>"/>
+    <link rel="stylesheet" type="text/css" href ="<c:url value="/css/bootstrap.css"/>"/>
 </head>
 <body>
 <div style ="margin-top: 250px;">
     <div align="center">
-        <h2>Registration</h2>
+        <font size="16"  face="Times New Roman">
+            <p class="bg-success"> <h3>Registration</h3></p>
+        </font>
+
+
+
 <form action="registrationStatus" method="post">
         <div class="form" >
-            <p><span>Login</span><input type="text" name="login"  required pattern="[a-z]+"><span></span><span></span></p>
-            <p><span>Name</span><input type="text" name="name"  required pattern="[a-z]{2,}"><span></span><span></span></p>
-            <p><span>Password</span><input type="password" name="password" required pattern ="(.){3,}"><span></span><span></span></p>
-
+            <p><span>Login</span><input type="text" name="login"  required pattern="{2,}"><span></span><span></span></p>
+            <p><span>Name</span><input type="text" name="name"  required pattern="{2,}"><span></span><span></span></p>
+            <div style="margin-left:130px;">
+                <p><span>Password</span><input type="password" name="password" required="" pattern="(.){3,}"><span></span><span></span></p>
+            </div>
         </div>
-
-    <input type="submit" value="submit" />
+    <button type="submit" class="btn btn-success">Submit</button>
 </form>
 </div>
     </div>
