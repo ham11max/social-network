@@ -23,10 +23,32 @@
   <!-- Table -->
 
   <table class="table table-hover" align="center">
-    <th align="center">ID</th>
-    <th align="center">Name</th>
-    <th align="center">Login</th>
-    <th align="center">Password</th>
+      <tr>
+    <td align="center">
+        <font size="10"  face="Times New Roman">
+            <p class="bg-success">ID</p>
+
+        </font>
+    </td>
+    <td align="center">
+        <font size="10"  face="Times New Roman">
+            <p class="bg-success">Name</p>
+        </font>
+
+    </td>
+    <td align="center">
+        <font size="10"  face="Times New Roman">
+            <p class="bg-success">Login</p>
+        </font>
+
+    </td>
+    <td align="center">
+        <font size="10"  face="Times New Roman">
+            <p class="bg-success">Password</p>
+        </font>
+
+    </td>
+      </tr>
     <c:forEach items="${user}" var="user">
       <tr>
         <td align="center"><c:out value="${user.id}"/></td>
