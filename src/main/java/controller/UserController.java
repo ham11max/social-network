@@ -31,15 +31,18 @@ public class UserController {
 
         @RequestMapping(value = "/auth", method = RequestMethod.POST)
         public ModelAndView login(
-                @ModelAttribute@RequestParam(value = "username") String username,
+                @ModelAttribute@RequestParam(value = "login") String login,
                 @ModelAttribute@RequestParam(value = "password") String pass) {
-            System.out.println("controller username: " + username);
+            System.out.println("controller login: " + login);
             System.out.println("controller password: " + pass);
-            if (userServices.checkForLogining(username,pass)){
-                return new ModelAndView("loginSucces");
+            ModelAndView model = new ModelAndView();
+            model.addObject("login",login);
+            if (userServices.checkForLogining(login,pass)){
+                model.setViewName("loginSucces");
             } else {
-                return new ModelAndView("error");
+                model.setViewName("error");
             }
+            return model;
 
         }
 
