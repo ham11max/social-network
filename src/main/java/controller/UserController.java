@@ -21,7 +21,6 @@ public class UserController {
 
         @Autowired
         private UserService userServices;
-        public User mainUser = new User();
         private String mainlogin ="qq";
 
 
@@ -39,7 +38,6 @@ public class UserController {
         public ModelAndView login(
                 @ModelAttribute@RequestParam(value = "login") String login,
                 @ModelAttribute@RequestParam(value = "password") String pass) {
-           // mainUser.setLogin(login);
             mainlogin = login;
             System.out.println(login);
             ModelAndView model = new ModelAndView();
@@ -88,7 +86,7 @@ public class UserController {
                 user.setName(name);
                 user.setPass(password);
                 userServices.save(user);
-                return  new ModelAndView("registrationSuccess");
+                return  new ModelAndView("success");
 
             }
 
@@ -120,7 +118,7 @@ public class UserController {
             request.setLogin(login);
             if(userServices.checkLogin(request)== true){
                 userServices.delete(login);
-                return new ModelAndView("deleteSuccess");
+                return new ModelAndView("success");
             }
             else{
                 return new ModelAndView("error");
@@ -129,7 +127,7 @@ public class UserController {
 
         }
         @RequestMapping(value ="/write", method = RequestMethod.GET)
-        public ModelAndView showMessagepage(){
+        public ModelAndView showMessagePage(){
             ModelAndView logDel =  new ModelAndView("writemessage");
                 return logDel ;
 
@@ -137,7 +135,6 @@ public class UserController {
         @RequestMapping(value = "/write" , method = RequestMethod.POST)
         public ModelAndView sendMessage(@RequestParam(value = "login") String login ,
                                         @RequestParam(value = "message") String message){
-
 
             CheckLoginRequest request = new CheckLoginRequest();
             request.setLogin(login);
@@ -151,10 +148,18 @@ public class UserController {
                 sending.setMessage(message);
                 userServices.sendMessage(sending);
 
-                return  new ModelAndView("registrationSuccess");
+                return  new ModelAndView("success");
 
             }
 
         }
+
+        @RequestMapping(value ="/read", method = RequestMethod.GET)
+        public ModelAndView showReadMessagePage(){
+            ModelAndView logDel =  new ModelAndView("writemessage");
+                return logDel ;
+
+                }
+
 
 }

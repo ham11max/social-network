@@ -25,6 +25,9 @@
     <br>
     <a class="btn btn-primary" href="write" role="button">Write message</a>
     </br>
+      <br>
+      <a class="btn btn-primary" href="read" role="button">Read messages</a>
+      </br>
     </div>
   </div>
 
