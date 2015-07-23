@@ -3,6 +3,7 @@ package controller;
 /**
  * Created by HAMMAX on 18.07.2015.
  */
+import DAO.UserDAOImp;
 import model.CheckLoginRequest;
 import model.Message;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import service.UserService;
 
+import javax.servlet.http.HttpSession;
 import java.util.*;
 
 
@@ -39,9 +41,12 @@ public class UserController {
                 @ModelAttribute@RequestParam(value = "login") String login,
                 @ModelAttribute@RequestParam(value = "password") String pass) {
             mainlogin = login;
+            CheckLoginRequest checkLoginRequest = new CheckLoginRequest();
+            checkLoginRequest.setLogin(login);
+            checkLoginRequest.setPassword(pass);
             ModelAndView model = new ModelAndView();
             model.addObject("login",login);
-            if (userServices.checkForLogining(login,pass)){
+            if (userServices.checkForLogging(checkLoginRequest)){
                 model.setViewName("loginSucces");
                 System.out.println(login);
             } else {
@@ -59,8 +64,16 @@ public class UserController {
 
         }
 
+        @RequestMapping(value ="/auth", method = RequestMethod.GET)
+        public ModelAndView getLoginSuccessPage(){
+            ModelAndView reg =  new ModelAndView("loginSucces");
+            return reg;
 
-        @RequestMapping(value ="/log", method = RequestMethod.GET)
+        }
+
+
+
+    @RequestMapping(value ="/log", method = RequestMethod.GET)
         public ModelAndView getLoginPage(){
             ModelAndView log =  new ModelAndView("login");
             return log ;
@@ -76,7 +89,7 @@ public class UserController {
 
             CheckLoginRequest request = new CheckLoginRequest();
             request.setLogin(login);
-            if(userServices.checkLogin(request) == true) {
+            if(userServices.checkLogin(request) == false) {
                 return new ModelAndView("error");
 
             } else {
@@ -113,7 +126,7 @@ public class UserController {
 
         @RequestMapping(value = "/del" , method = RequestMethod.POST)
         public ModelAndView delUser(@RequestParam(value = "login" ) String login){
-             CheckLoginRequest request = new CheckLoginRequest();
+            CheckLoginRequest request = new CheckLoginRequest();
             request.setLogin(login);
             if(userServices.checkLogin(request)== true){
                 userServices.delete(login);

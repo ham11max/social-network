@@ -14,9 +14,7 @@ import java.util.List;
  */
 public interface UserService {
 
-    boolean checkLogin(CheckLoginRequest request);
-
-    User findByLogin(String login);
+   boolean checkLogin(CheckLoginRequest request);
 
     List<User> findAll();
 
@@ -28,8 +26,7 @@ public interface UserService {
 
     void sendMessage(Message message);
 
-    @Transactional(isolation = Isolation.DEFAULT)
-    boolean checkForLogining(String login , String password);
+    boolean checkForLogging(CheckLoginRequest request);
 
 
 }

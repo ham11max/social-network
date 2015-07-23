@@ -9,9 +9,6 @@ import java.util.List;
  */
 
 public interface UserDao {
-
-	boolean checkLogin(String login);
-
 	User findByLogin(String login);
 
 	List<User> findAll();
@@ -19,8 +16,6 @@ public interface UserDao {
 	void save(User user);
 
 	void delete(String login);
-
-	boolean checkForLogining(String user, String password);
 
 	void sendMessage(Message message);
 

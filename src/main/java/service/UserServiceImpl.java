@@ -25,33 +25,41 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User findByLogin(String login) {
-        return userDao.findByLogin(login);
-    }
-
-    @Override
     public List<User> findAll() {
+
         return userDao.findAll();
     }
 
     @Override
     public void delete(String login) {
+
         userDao.delete(login);
     }
 
     @Override
     public void save(User user) {
+
         userDao.save(user);
     }
 
-    @Transactional()
-    public boolean checkForLogining(String login , String password){
-        return userDao.checkForLogining(login, password);
+    @Override
+    public boolean checkForLogging(CheckLoginRequest request){
+
+        if(userDao.findByLogin(request.getLogin()) == null){
+            return false;
+        }else if(userDao.findByLogin(request.getLogin()).getPass().equals(request.getPassword())){
+            return true;
+        }
+       return false;
     }
 
     public boolean checkLogin(CheckLoginRequest request){
-        return userDao.checkLogin(request.getLogin());
-    };
+
+            if (userDao.findByLogin(request.getLogin()) == null) {
+                return false;
+            }
+        return true;
+    }
 
     public void sendMessage(Message message){
         userDao.sendMessage(message);

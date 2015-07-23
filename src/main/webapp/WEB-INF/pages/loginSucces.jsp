@@ -19,9 +19,10 @@
   <div align="center">
     <h2>Login success</h2>
     <h4>Hi ${login} </h4>
+
     <br>
     <a class="btn btn-primary" href="users" role="button">Get all users</a>
-</br>
+    </br>
     <br>
     <a class="btn btn-primary" href="write" role="button">Write message</a>
     </br>

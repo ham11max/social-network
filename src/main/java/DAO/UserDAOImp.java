@@ -42,83 +42,6 @@ public class UserDAOImp implements UserDao {
     }
 
     @Override
-    public boolean checkForLogining(String login, String password){
-        //boolean status = false;
-        String query = "select  login , password from users";
-        Connection con = null;
-        PreparedStatement ps = null;
-        ResultSet rs = null;
-        try{
-            con = dataSourceForUser.getConnection();
-            ps = con.prepareStatement(query);
-            rs = ps.executeQuery();
-            while(rs.next()){
-                if ((login.equals(rs.getString("login")))&&(password.equals(rs.getString("password")))){
-                    return true;
-                }
-            }
-            return false;
-        }catch(SQLException e){
-            e.printStackTrace();
-        }finally {
-            try {
-                if (rs != null) {
-                    rs.close();
-                }
-                if (ps != null) {
-                    ps.close();
-                }
-                if (con != null) {
-                    con.close();
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-
-        return false;
-    }
-
-    @Override
-    public boolean checkLogin(String login){
-        String query = "select  login  from users";
-
-
-        Connection con = null;
-        PreparedStatement ps = null;
-        ResultSet rs = null;
-        try{
-            con = dataSourceForUser.getConnection();
-            ps = con.prepareStatement(query);
-            rs = ps.executeQuery();
-            while(rs.next()){
-                if (login.equals(rs.getString("login"))){
-                    return true;
-                }
-            }
-            return false;
-        }catch(SQLException e){
-            e.printStackTrace();
-        }finally {
-            try {
-                if (rs != null) {
-                    rs.close();
-                }
-                if (ps != null) {
-                    ps.close();
-                }
-                if (con != null) {
-                    con.close();
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-
-        return false;
-    }
-
-    @Override
     public User findByLogin(String login) {
 
         Map<String, Object> params = new HashMap<String, Object>();
@@ -126,10 +49,11 @@ public class UserDAOImp implements UserDao {
 
         String query = "SELECT * FROM users WHERE login=:login";
 
-        User result = null;
+        User result;
         try {
             result = namedParameterJdbcTemplate.queryForObject(query, params, new UserMapper());
-        } catch (EmptyResultDataAccessException e) {
+        } catch (Exception e) {
+            result = null;
             System.out.println("User does not exist");
         }
         return result;
@@ -139,7 +63,13 @@ public class UserDAOImp implements UserDao {
     public List<User> findAll() {
 
         String sql = "SELECT * FROM users";
-        List<User> result = namedParameterJdbcTemplate.query(sql, new UserMapper());
+        List<User> result;
+        try {
+             result = namedParameterJdbcTemplate.query(sql, new UserMapper());
+        } catch (Exception ex){
+            System.out.println("DB is empty");
+            result = null;
+        }
 
         return result;
     }
@@ -200,7 +130,7 @@ public class UserDAOImp implements UserDao {
 
         public User mapRow(ResultSet rs, int rowNum) throws SQLException {
             User user = new User();
-            user.setId(rs.getInt("id"));
+          //  user.setId(rs.getInt("id"));
             user.setName(rs.getString("name"));
             user.setLogin(rs.getString("login"));
             user.setPass(rs.getString("password"));
@@ -220,4 +150,5 @@ public class UserDAOImp implements UserDao {
             return message;
         }
     }
+
 }
