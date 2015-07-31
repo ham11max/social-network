@@ -12,13 +12,8 @@ public class User
     protected String name;
     protected String pass;
     protected String login;
-    List<String> friends;
 
 
-
-    public String toString(){
-        return "User{" + "id=" + id +"login=" + login + ", name=" + name +  '}';
-    }
     public String getName() {
         return name;
     }
@@ -50,15 +45,4 @@ public class User
     public void setLogin(String login) {
         this.login = login;
     }
-
-    public List<String> getFriends() {
-        return friends;
-    }
-
-    public void setFriends(List<String> friends) {
-        this.friends = friends;
-    }
-
-
-
 }

@@ -130,7 +130,7 @@ public class UserDAOImp implements UserDao {
 
         public User mapRow(ResultSet rs, int rowNum) throws SQLException {
             User user = new User();
-          //  user.setId(rs.getInt("id"));
+            user.setId(rs.getInt("id"));
             user.setName(rs.getString("name"));
             user.setLogin(rs.getString("login"));
             user.setPass(rs.getString("password"));

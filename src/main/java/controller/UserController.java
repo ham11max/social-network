@@ -89,7 +89,7 @@ public class UserController {
 
             CheckLoginRequest request = new CheckLoginRequest();
             request.setLogin(login);
-            if(userServices.checkLogin(request) == false) {
+            if(!userServices.checkLogin(request)) {
                 return new ModelAndView("error");
 
             } else {
@@ -128,7 +128,7 @@ public class UserController {
         public ModelAndView delUser(@RequestParam(value = "login" ) String login){
             CheckLoginRequest request = new CheckLoginRequest();
             request.setLogin(login);
-            if(userServices.checkLogin(request)== true){
+            if(userServices.checkLogin(request)){
                 userServices.delete(login);
                 return new ModelAndView("success");
             }
@@ -150,7 +150,7 @@ public class UserController {
 
             CheckLoginRequest request = new CheckLoginRequest();
             request.setLogin(login);
-            if(userServices.checkLogin(request) == false) {
+            if(!userServices.checkLogin(request)) {
                 return new ModelAndView("error");
 
             } else {
