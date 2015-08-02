@@ -13,12 +13,11 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import service.UserService;
-
-import javax.servlet.http.HttpSession;
 import java.util.*;
 
 
 @Controller
+@SessionAttributes(types = CheckLoginRequest.class)
 public class UserController {
 
         @Autowired
@@ -45,7 +44,6 @@ public class UserController {
             checkLoginRequest.setLogin(login);
             checkLoginRequest.setPassword(pass);
             ModelAndView model = new ModelAndView();
-            model.addObject("login",login);
             if (userServices.checkForLogging(checkLoginRequest)){
                 model.setViewName("loginSucces");
                 System.out.println(login);
@@ -98,7 +96,7 @@ public class UserController {
                 user.setName(name);
                 user.setPass(password);
                 userServices.save(user);
-                return  new ModelAndView("success");
+                return  new ModelAndView("regSuccess");
 
             }
 
@@ -147,7 +145,6 @@ public class UserController {
         @RequestMapping(value = "/write" , method = RequestMethod.POST)
         public ModelAndView sendMessage(@RequestParam(value = "login") String login ,
                                         @RequestParam(value = "message") String message){
-
             CheckLoginRequest request = new CheckLoginRequest();
             request.setLogin(login);
             if(!userServices.checkLogin(request)) {
