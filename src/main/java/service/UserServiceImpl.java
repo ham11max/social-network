@@ -1,5 +1,6 @@
 package service;
 
+import java.lang.*;
 import DAO.UserDao;
 import model.CheckLoginRequest;
 import model.Message;
@@ -26,7 +27,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<User> findAll() {
-
         return userDao.findAll();
     }
 
@@ -38,7 +38,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void save(User user) {
-
         userDao.save(user);
     }
 
@@ -47,7 +46,7 @@ public class UserServiceImpl implements UserService {
 
         if(userDao.findByLogin(request.getLogin()) == null){
             return false;
-        }else if(userDao.findByLogin(request.getLogin()).getPass().equals(request.getPassword())){
+        }else if(userDao.findByLogin(request.getLogin()).getPass().equals(request.getPassword().hashCode())){
             return true;
         }
        return false;

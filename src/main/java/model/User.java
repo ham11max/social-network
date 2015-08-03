@@ -10,7 +10,7 @@ public class User
 
     protected int id;
     protected String name;
-    protected String pass;
+    protected Integer pass;
     protected String login;
 
 
@@ -22,7 +22,7 @@ public class User
         return id;
     }
 
-    public String getPass() {
+    public Integer getPass() {
         return pass;
     }
 
@@ -38,7 +38,7 @@ public class User
         this.name = name;
     }
 
-    public void setPass(String pass) {
+    public void setPass(Integer pass) {
         this.pass = pass;
     }
 

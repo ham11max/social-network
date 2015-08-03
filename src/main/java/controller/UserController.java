@@ -3,49 +3,57 @@ package controller;
 /**
  * Created by HAMMAX on 18.07.2015.
  */
-import DAO.UserDAOImp;
+import model.SessionSaver;
 import model.CheckLoginRequest;
 import model.Message;
 import org.springframework.beans.factory.annotation.Autowired;
 import model.User;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 import service.UserService;
 import java.util.*;
 
 
 @Controller
-@SessionAttributes(types = CheckLoginRequest.class)
+@SessionAttributes(types = SessionSaver.class)
 public class UserController {
 
         @Autowired
         private UserService userServices;
-        private String mainlogin ="qq";
+        private  String mainLogin = "qq";
 
 
 
 
         @RequestMapping(value = "/", method = RequestMethod.GET)
-        public ModelAndView printWelcome(ModelMap model) {
-            ModelAndView a  = new ModelAndView("home");
+        public ModelAndView printWelcome(SessionSaver sessionSaver) {
+            ModelAndView a  = new ModelAndView();
+            if(sessionSaver.getLogin()==null) {
+                a.setViewName("home");
+            }else {
+                a.addObject(sessionSaver);
+                a.setViewName("loginSuccess");
+            }
             return a;
 
         }
 
 
         @RequestMapping(value = "/auth", method = RequestMethod.POST)
-        public ModelAndView login(
-                @ModelAttribute@RequestParam(value = "login") String login,
-                @ModelAttribute@RequestParam(value = "password") String pass) {
-            mainlogin = login;
+        public ModelAndView login(@RequestParam(value = "login") String login,
+                                  @RequestParam(value = "password") String pass) {
+            mainLogin = login;
+            SessionSaver sessionSaver = new SessionSaver();
+            sessionSaver.setLogin(login);
             CheckLoginRequest checkLoginRequest = new CheckLoginRequest();
             checkLoginRequest.setLogin(login);
             checkLoginRequest.setPassword(pass);
             ModelAndView model = new ModelAndView();
             if (userServices.checkForLogging(checkLoginRequest)){
-                model.setViewName("loginSucces");
+                model.addObject(sessionSaver);
+                model.setViewName("loginSuccess");
                 System.out.println(login);
             } else {
                 model.setViewName("error");
@@ -63,19 +71,25 @@ public class UserController {
         }
 
         @RequestMapping(value ="/auth", method = RequestMethod.GET)
-        public ModelAndView getLoginSuccessPage(){
-            ModelAndView reg =  new ModelAndView("loginSucces");
+        public ModelAndView getLoginSuccessPage(SessionSaver sessionSaver){
+            ModelAndView reg =  new ModelAndView("loginSuccess");
+            reg.addObject(sessionSaver);
             return reg;
 
         }
 
 
 
-    @RequestMapping(value ="/log", method = RequestMethod.GET)
-        public ModelAndView getLoginPage(){
-            ModelAndView log =  new ModelAndView("login");
+        @RequestMapping(value ="/log", method = RequestMethod.GET)
+        public ModelAndView getLoginPage(SessionSaver sessionSaver){
+            ModelAndView log = new ModelAndView();
+            if(sessionSaver.getLogin()==null) {
+                log.setViewName("login");
+            }else {
+                log.addObject(sessionSaver);
+                log.setViewName("loginSuccess");
+            }
             return log ;
-
         }
 
 
@@ -87,14 +101,15 @@ public class UserController {
 
             CheckLoginRequest request = new CheckLoginRequest();
             request.setLogin(login);
-            if(!userServices.checkLogin(request)) {
+            System.out.println(request.getLogin());
+            if(userServices.checkLogin(request)) {
                 return new ModelAndView("error");
 
             } else {
                 User user = new User();
                 user.setLogin(login);
                 user.setName(name);
-                user.setPass(password);
+                user.setPass(password.hashCode());
                 userServices.save(user);
                 return  new ModelAndView("regSuccess");
 
@@ -137,14 +152,17 @@ public class UserController {
 
         }
         @RequestMapping(value ="/write", method = RequestMethod.GET)
-        public ModelAndView showMessagePage(){
+        public ModelAndView showMessagePage(SessionSaver sessionSaver){
             ModelAndView logDel =  new ModelAndView("writemessage");
+            logDel.addObject(sessionSaver);
                 return logDel ;
 
     }
         @RequestMapping(value = "/write" , method = RequestMethod.POST)
         public ModelAndView sendMessage(@RequestParam(value = "login") String login ,
-                                        @RequestParam(value = "message") String message){
+                                        @RequestParam(value = "message") String message
+                                        ){
+
             CheckLoginRequest request = new CheckLoginRequest();
             request.setLogin(login);
             if(!userServices.checkLogin(request)) {
@@ -152,7 +170,7 @@ public class UserController {
 
             } else {
                 Message sending = new Message();
-                sending.setSender(mainlogin);
+                sending.setSender(mainLogin);
                 sending.setReceiver(login);
                 sending.setMessage(message);
                 userServices.sendMessage(sending);
@@ -164,12 +182,13 @@ public class UserController {
         }
 
         @RequestMapping(value ="/read", method = RequestMethod.GET)
-        public ModelAndView showReadMessagePage(ModelAndView model){
-            List<Message> messages = userServices.getMessages(mainlogin);
+        public ModelAndView showReadMessagePage(SessionSaver sessionSaver){
+            ModelAndView model = new ModelAndView();
+            List<Message> messages = userServices.getMessages(sessionSaver.getLogin());
             if(messages.isEmpty()){
                 String status = "You don`t have messages!!!";
                 model.addObject("status",status);
-                model.addObject("log" , mainlogin);
+                model.addObject("log" , sessionSaver.getLogin());
                 model.setViewName("noMessages");
                 return model;
             }
@@ -180,6 +199,12 @@ public class UserController {
 
             }
 
+        }
+
+        @RequestMapping(value = "/exit", method = RequestMethod.GET)
+        public ModelAndView exit(SessionStatus sessionStatus){
+            sessionStatus.setComplete();
+            return new ModelAndView("exit");
         }
 
 
