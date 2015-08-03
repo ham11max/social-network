@@ -15,6 +15,7 @@
 <body>
 <div style ="margin-top: 210px;">
   <div align="center">
+    <h2>${sessionSaver.login} you can</h2>
     <h2>Send message</h2>
     <h4>Please write receiver login</h4>
     <form class="form-inline" action="write" method="post">
@@ -22,7 +23,7 @@
         <label class="sr-only" for="exampleInputAmount">Send message</label>
         <div class="input-group">
           <div class="input-group-addon">User</div>
-          <input type="text" name="login" class="form-control" id="exampleInputAmount" placeholder="Write login here">
+          <input type="text" name="receiver" class="form-control" id="exampleInputAmount" placeholder="Write login here">
         </div>
       </div>
       <textarea class="form-control" name="message" rows="10"></textarea>

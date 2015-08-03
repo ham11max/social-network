@@ -18,7 +18,7 @@
 <div style ="margin-top: 250px;">
   <div align="center">
     <h2>Login success</h2>
-    <h4>Hi ${login} </h4>
+    <h4>Hi ${sessionSaver.login} </h4>
 
     <br>
     <a class="btn btn-primary" href="users" role="button">Get all users</a>
@@ -29,6 +29,11 @@
       <br>
       <a class="btn btn-primary" href="read" role="button">Read messages</a>
       </br>
+    <br>
+    <br>
+    <a class="btn btn-danger" href="exit" role="button">EXIT</a>
+
+
     </div>
   </div>
 
