@@ -22,7 +22,6 @@ public class UserController {
 
         @Autowired
         private UserService userServices;
-        private  String mainLogin = "qq";
 
 
         void checkSession(ModelAndView modelAndView ,SessionSaver sessionSaver, String setPage , String breakPage){
@@ -45,7 +44,6 @@ public class UserController {
         @RequestMapping(value = "/auth", method = RequestMethod.POST)
         public ModelAndView login(@RequestParam(value = "login") String login,
                                   @RequestParam(value = "password") String pass) {
-            mainLogin = login;
             SessionSaver sessionSaver = new SessionSaver();
             sessionSaver.setLogin(login);
             CheckLoginRequest checkLoginRequest = new CheckLoginRequest();
