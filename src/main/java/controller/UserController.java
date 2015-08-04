@@ -103,7 +103,7 @@ public class UserController {
                 User user = new User();
                 user.setLogin(login);
                 user.setName(name);
-                user.setPass(password.hashCode());
+                user.setPass(userServices.hash(password));
                 userServices.save(user);
                 return  new ModelAndView("regSuccess");
 

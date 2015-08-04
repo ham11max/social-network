@@ -41,12 +41,17 @@ public class UserServiceImpl implements UserService {
         userDao.save(user);
     }
 
+    public String hash(String password){
+        String encrypted = org.apache.commons.codec.digest.DigestUtils.sha256Hex(password);
+        return encrypted;
+    }
+
     @Override
     public boolean checkForLogging(CheckLoginRequest request){
 
         if(userDao.findByLogin(request.getLogin()) == null){
             return false;
-        }else if(userDao.findByLogin(request.getLogin()).getPass().equals(request.getPassword().hashCode())){
+        }else if(userDao.findByLogin(request.getLogin()).getPass().equals(hash(request.getPassword()))){
             return true;
         }
        return false;

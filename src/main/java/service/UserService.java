@@ -28,5 +28,7 @@ public interface UserService {
 
     boolean checkForLogging(CheckLoginRequest request);
 
+    String hash(String password);
+
 
 }

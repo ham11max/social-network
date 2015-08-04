@@ -133,7 +133,7 @@ public class UserDAOImp implements UserDao {
             user.setId(rs.getInt("id"));
             user.setName(rs.getString("name"));
             user.setLogin(rs.getString("login"));
-            user.setPass(rs.getInt("password"));
+            user.setPass(rs.getString("password"));
 
             return user;
         }
