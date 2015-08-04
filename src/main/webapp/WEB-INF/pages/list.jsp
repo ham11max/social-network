@@ -39,7 +39,7 @@
     </td>
     <td align="center">
         <font size="10"  face="Times New Roman">
-            <p class="bg-success"><spring:message code="label.users.table.name"/> </p>
+            <p class="bg-success"><spring:message code="label.users.table.login"/> </p>
         </font>
 
     </td>

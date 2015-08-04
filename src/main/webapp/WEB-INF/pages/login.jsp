@@ -22,11 +22,11 @@
     <form action="auth" method="post">
       <div class="form-group">
         <label for="exampleInputEmail1"><spring:message code="label.users.table.login"/> </label>
-        <input type="text" name="login" class="form-control" id="exampleInputEmail1" placeholder="Login">
+        <input type="text" name="login" class="form-control" id="exampleInputEmail1" placeholder="<spring:message code="label.users.table.login"/>">
       </div>
       <div class="form-group">
         <label for="exampleInputPassword1"><spring:message code="label.password"/> </label>
-        <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+        <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="<spring:message code="label.password"/> ">
       </div>
       <button type="submit" class="btn btn-default"><spring:message code="label.submit"/> </button>
     </form>

@@ -59,7 +59,7 @@ input[type="surname"]+span+span:after{
       font:10px  Arial, sans-serif;
       color:#444;
   }input[type="password"]+span+span:after{
-       content:"*Use at least 6 characters.";
+       content:"";
        padding-left:8px;
        font:10px  Arial, sans-serif;
        color:#444;
