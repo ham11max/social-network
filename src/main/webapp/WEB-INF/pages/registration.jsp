@@ -27,13 +27,12 @@
         <div class="form" >
             <p><span><spring:message code="label.users.table.login"/> </span><input type="text" name="login"  required pattern="{2,}"><span></span><span></span></p>
             <p><span><spring:message code="label.name"/> </span><input type="text" name="name"  required pattern="{2,}"><span></span><span></span></p>
-            <div style="margin-left:130px;">
-                <p><span><spring:message code="label.password"/> </span><input type="password" name="password" required="" pattern="(.){3,}"><span></span><span></span></p>
-            </div>
+            <p><span><spring:message code="label.password"/> </span><input type="password" name="password" required="" pattern="(.){3,}"><span></span><span></span></p>
+
         </div>
     <button type="submit" class="btn btn-success"><spring:message code="label.submit"/> </button>
 </form>
 </div>
-    </div>
+</div>
 </body>
 </html>
