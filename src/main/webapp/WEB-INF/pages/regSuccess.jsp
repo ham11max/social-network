@@ -1,3 +1,4 @@
+<%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%--
   Created by IntelliJ IDEA.
   User: HAMMAX
@@ -14,7 +15,9 @@
 <meta http-equiv="Refresh" content="2; URL= /application/log">
 <div style ="margin-top: 210px;">
   <div align="center">
-    <h2>Registration Success!</h2>
+    <h2>
+      <spring:message code = "label.reg.success"/>
+    </h2>
   </div>
 </div>
 </body>

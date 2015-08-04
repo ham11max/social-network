@@ -7,6 +7,7 @@
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <html>
 <head>
   <title></title>
@@ -18,7 +19,7 @@
 
   <div class="panel panel-default"align="center">
     <!-- Default panel contents -->
-    <div class="panel-heading"><h2>All messages</h2></div>
+    <div class="panel-heading"><h2><spring:message code="label.read.top.message1"/> </h2></div>
 
     <!-- Table -->
 
@@ -32,13 +33,13 @@
         </td>
         <td align="center">
           <font size="10"  face="Times New Roman">
-            <p class="bg-success">Sender</p>
+            <p class="bg-success"><spring:message code="label.read.table.sender"/> </p>
           </font>
 
         </td>
         <td align="center">
           <font size="10"  face="Times New Roman">
-            <p class="bg-success">Message</p>
+            <p class="bg-success"><spring:message code="label.read.table.message"/> </p>
           </font>
 
       </tr>
@@ -51,7 +52,7 @@
       </c:forEach>
     </table>
   </div>
-    <a class="btn btn-success" href="write" role="button">Send Message</a>
+    <a class="btn btn-success" href="write" role="button"><spring:message code="label.read.button"/> </a>
 </div>
 </div>
 </body>

@@ -7,25 +7,26 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <html>
 <head>
-    <title>delete</title>
+    <title></title>
     <link rel="stylesheet" type="text/css" href ="<c:url value="/css/bootstrap.css"/>"/>
 </head>
 <body>
 <div style ="margin-top: 210px;">
 <div align="center">
-<h2>Delete</h2>
-<h4>You want delete user, please insert his login</h4>
+<h2><spring:message code="label.logdel.top.message1"/> </h2>
+<h4><spring:message code="label.logdel.top.message2"/> </h4>
     <form class="form-inline" action="del" method="post">
         <div class="form-group">
-            <label class="sr-only" for="exampleInputAmount">Delete user</label>
+            <label class="sr-only" for="exampleInputAmount"><spring:message code="label.logdel.button"/> </label>
             <div class="input-group">
-                <div class="input-group-addon">User</div>
-                <input type="text" name="login" class="form-control" id="exampleInputAmount" placeholder="Write login here">
+                <div class="input-group-addon"><spring:message code="label.logdel.form.message1"/></div>
+                <input type="text" name="login" class="form-control" id="exampleInputAmount" placeholder="<spring:message code="label.logdel.form.message2"/>">
             </div>
         </div>
-        <button type="submit" class="btn btn-primary">Delete User</button>
+        <button type="submit" class="btn btn-primary"><spring:message code="label.logdel.button"/> </button>
     </form>
 
 </div>
